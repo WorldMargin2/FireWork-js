@@ -1,0 +1,53 @@
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>firework demo</title>
+    <script src="./firework.js"></script>
+    <script>
+        window.onload = ()=> {
+            canvas=document.getElementById("firework-canvas");              //get canvas context    (required) //flip y axis           (required)
+            let ctx =canvas.getContext("2d");
+            let firework = new FireworkCanvas(
+                ctx, 
+                canvas.width, 
+                canvas.height,
+                10,                                     /* max rendering fireworks(max_fireworks) */
+                args={
+                    radius: 2,/* radius of firework */
+                    speed: 70,
+                    gravity: 10,
+                    wake_particles: 100,/* max rendering wake */
+                    life: 2,/* life of firework */
+                    explode_particles: 100,/* max rendering explode */
+                    frameRate: 120,/* frame rate */
+                }
+            );
+            firework.updateSize(canvas,window);
+            ctx=canvas.getContext("2d");
+            firework.start();                           //start main loop       (required)
+            setInterval(()=>{
+                firework.addRandomFirework();           //just run after start
+            }, 1000);
+
+            firework.autoResize();
+
+            startButton = document.getElementById("control-button");
+            startButton.onclick = function() {
+                if (firework.isRunning()) {             //check if firework is running
+                    firework.stop();
+                    startButton.innerHTML = "启动";
+                } else {
+                    firework.start();
+                    startButton.innerHTML = "停止";
+                }
+            };
+        };
+    </script>
+</head>
+<body>
+    <canvas id="firework-canvas" style="width: 100vw;height: 100vh;"></canvas>
+    <button id="control-button">启动</button>
+    
+</body>
+</html>
