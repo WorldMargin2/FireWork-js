@@ -29,11 +29,11 @@
                 firework.addRandomFirework();           //just run after start
             }, 1000);
 
-            firework.autoResize();
+            firework.autoResize(canvas,window);
 
             startButton = document.getElementById("control-button");
-            startButton.onclick = function() {
-                if (firework.isRunning()) {             //check if firework is running
+            startButton.onclick = ()=> {
+                if (firework.is_running()) {             //check if firework is running
                     firework.stop();
                     startButton.innerHTML = "启动";
                 } else {
