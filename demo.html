@@ -25,7 +25,6 @@
             );
             firework.updateSize(canvas,window);
             ctx=canvas.getContext("2d");
-            firework.start();                           //start main loop       (required)
             setInterval(()=>{
                 firework.addRandomFirework();           //just run after start
             }, 1000);
