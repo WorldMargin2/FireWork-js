@@ -16,19 +16,19 @@
                 10,                                     /* max rendering fireworks(max_fireworks) */
                 args={
                     radius: 2,/* radius of firework */
-                    speed: 70,
-                    gravity: 10,
-                    wake_particles: 100,/* max rendering wake */
+                    speed: 100,
+                    gravity: 30,
+                    wake_particles: 75,/* max rendering wake */
                     life: 2,/* life of firework */
-                    explode_particles: 100,/* max rendering explode */
-                    frameRate: 120,/* frame rate */
+                    explode_particles: 75,/* max rendering explode */
+                    frameRate: 60,/* frame rate */
                 }
             );
             firework.updateSize(canvas,window);
             ctx=canvas.getContext("2d");
             setInterval(()=>{
                 firework.addRandomFirework();           //just run after start
-            }, 1000);
+            }, 1500);
 
             firework.autoResize(canvas,window);
 
