@@ -141,6 +141,7 @@ class FireworkCanvas {
     #max_fireworks = 0;
     #args = {};
     #last_frame_time=0;
+    #requestAnimationFrame = null;
     constructor(ctx, width, height,  max_fireworks = 10,args = {}) {
         this.#ctx = ctx;
         this.#width = width;
@@ -183,13 +184,16 @@ class FireworkCanvas {
         if (this.#fireworks.length > this.#max_fireworks*2) {
             this.#fireworks = this.#fireworks.slice(0, this.#max_fireworks);
         };
-        requestAnimationFrame((frame_start_time)=>{this.#mainLoop(frame_start_time);});
+        this.#requestAnimationFrame=requestAnimationFrame((frame_start_time)=>{this.#mainLoop(frame_start_time);});
     };
 
     start() {
         if (this.#started) {
             return;
         };
+        if(this.#requestAnimationFrame != null) {
+            cancelAnimationFrame(this.#requestAnimationFrame);
+        }
         this.#started = true;
         this.#mainLoop();
     };
@@ -198,7 +202,10 @@ class FireworkCanvas {
         if (!this.#started) {
             return;
         };
-        this.#last_frame_time=0
+        if(this.#requestAnimationFrame != null) {
+            cancelAnimationFrame(this.#requestAnimationFrame);
+        }
+        this.#last_frame_time=0;
         this.#started = false;
     };
 
@@ -236,6 +243,16 @@ class FireworkCanvas {
 
     setMaxFireworks(max) {
         this.#max_fireworks = max;
+    }
+
+    setAutoCloseOrStart() {
+        window.addEventListener('visibilitychange',()=> {
+            if(document.hidden) {
+                this.stop();
+            } else {
+                this.start();
+            }
+        });
     }
 };
 
