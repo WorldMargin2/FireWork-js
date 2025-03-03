@@ -56,7 +56,7 @@
     <script>
         button=document.getElementById("set_arg_button");
         button.onclick = ()=> {
-            firework.setArgs(JSON.parse(document.getElementById("set_arg").value));
+            firework.setArgs(eval(document.getElementById("set_arg").value));
         };
 
     </script>
