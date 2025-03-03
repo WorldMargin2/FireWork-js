@@ -246,7 +246,18 @@ class FireworkCanvas {
     }
 
     setAutoCloseOrStart() {
+        this.removeAutoCloseOrStart();
         window.addEventListener('visibilitychange',()=> {
+            if(document.hidden) {
+                this.stop();
+            } else {
+                this.start();
+            }
+        });
+    }
+
+    removeAutoCloseOrStart() {
+        window.removeEventListener('visibilitychange',()=> {
             if(document.hidden) {
                 this.stop();
             } else {
