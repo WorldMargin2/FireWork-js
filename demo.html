@@ -6,10 +6,11 @@
     <title>firework demo</title>
     <script src="./firework.js"></script>
     <script>
+        let firework;
         window.onload = ()=> {
             canvas=document.getElementById("firework-canvas");              //get canvas context    (required) //flip y axis           (required)
             let ctx =canvas.getContext("2d");
-            let firework = new FireworkCanvas(
+            firework = new FireworkCanvas(
                 ctx, 
                 canvas.width, 
                 canvas.height,
