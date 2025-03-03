@@ -198,6 +198,7 @@ class FireworkCanvas {
         if (!this.#started) {
             return;
         };
+        this.#last_frame_time=0
         this.#started = false;
     };
 
