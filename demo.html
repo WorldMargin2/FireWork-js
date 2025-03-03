@@ -49,6 +49,17 @@
 <body style="background-color: black;">
     <canvas id="firework-canvas" style="width: 100vw;height: 100vh;background-image: url('src-ignoreable/WorldMargin.svg');background-size: auto;background-repeat: no-repeat;background-position: center;"></canvas>
     <button id="control-button">启动</button>
+    <textarea name="" id="set_arg" placeholder="设置参数(set args)" ></textarea>
+    <button id="set_arg_button">确认</button>
+
+
+    <script>
+        button=document.getElementById("set_arg_button");
+        button.onclick = ()=> {
+            firework.setArgs(JSON.parse(document.getElementById("set_arg").value));
+        };
+
+    </script>
     
 </body>
 </html>
