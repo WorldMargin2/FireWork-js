@@ -159,7 +159,7 @@ class FireworkCanvas {
     #hidden_ctx= null;
     constructor(ctx, width, height,  max_fireworks = 10,args = {}) {
         this.#ctx = ctx;
-        this.init_offset_canvas(width,height);
+        this.init_hidden_canvas(width,height);
         this.#width = width;
         this.#height = height;
         this.#max_fireworks = max_fireworks; // 最大并行更新烟花数量
