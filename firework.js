@@ -155,13 +155,23 @@ class FireworkCanvas {
     #args = {};
     #last_frame_time=0;
     #requestAnimationFrame = null;
+    #hidden_canvas = null;
+    #hidden_ctx= null;
     constructor(ctx, width, height,  max_fireworks = 10,args = {}) {
         this.#ctx = ctx;
+        this.init_offset_canvas(width,height);
         this.#width = width;
         this.#height = height;
         this.#max_fireworks = max_fireworks; // 最大并行更新烟花数量
         this.#args = {...args_template,...args};
     };
+
+    init_hidden_canvas(width ,height){
+        this.#hidden_canvas = document.createElement('canvas');
+        this.#hidden_canvas.width = width;
+        this.#hidden_canvas.height = height;
+        this.#hidden_ctx = this.#hidden_canvas.getContext('2d');
+    }
 
     addFirework(arg) {
         if(!this.#started) {
@@ -175,7 +185,7 @@ class FireworkCanvas {
 
     addRandomFirework() {
         let arg = {};
-        arg.ctx = this.#ctx;
+        arg.ctx = this.#hidden_ctx;
         arg.x = Math.random() * this.#width;
         arg.color = `rgb(${Math.random() * 255},${Math.random() * 255},${Math.random() * 255})`;
         this.addFirework(arg);
@@ -192,12 +202,15 @@ class FireworkCanvas {
             return;
         };
         this.#ctx.clearRect(0, 0, this.#width, this.#height);
+        this.#ctx.drawImage(this.#hidden_canvas,0,0);
+        this.#hidden_ctx.clearRect(0, 0, this.#width, this.#height);
         for (let i = 0; i < this.#fireworks.length; i++) {
             this.#fireworks[i].update(delta);
         };
         if (this.#fireworks.length > this.#max_fireworks*2) {
             this.#fireworks = this.#fireworks.slice(0, this.#max_fireworks);
         };
+        this.#ctx.drawImage(this.#hidden_canvas,0,0);
         this.#requestAnimationFrame=requestAnimationFrame((frame_start_time)=>{this.#mainLoop(frame_start_time);});
     };
 
@@ -226,9 +239,13 @@ class FireworkCanvas {
     updateSize(canvas,element) {
         this.#width = element.innerWidth;
         this.#height = element.innerHeight;
+
         canvas.width = element.innerWidth;
         canvas.height = element.innerHeight;
         this.#ctx.setTransform(1,0,0,-1,0,canvas.height);
+        //更新
+        this.#hidden_canvas.width = element.innerWidth;
+        this.#hidden_canvas.height = element.innerHeight;
     };
 
     autoResize(canvas,element=window) {
