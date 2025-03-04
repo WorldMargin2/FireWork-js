@@ -16,22 +16,22 @@
                 canvas.height,
                 10,                                     /* max rendering fireworks(max_fireworks) */
                 args={
-                    radius: 2,/* radius of firework */
-                    speed: 150,
                     gravity: 50,
-                    wake_particles: 75,/* max rendering wake */
-                    life: 3,/* life of firework */
-                    explode_time: 2,/* life of explode */
-                    explode_particles: 150,/* max rendering explode */
+                    speed: 150,
+                    life_time: 3,
+                    explode_time: 2,
+                    explode_particles: 125,
+                    wake_particles: 60,
+                    radius: 2,
+                    color_random: false
                 }
             );
             firework.updateSize(canvas,window);
-            ctx=canvas.getContext("2d");
             firework.autoResize(canvas,window);
             firework.setAutoCloseOrStart();
             setInterval(()=>{
                 firework.addRandomFirework();           //just run after start
-            }, 1500);
+            }, 1000);
 
             startButton = document.getElementById("control-button");
             startButton.onclick = ()=> {
