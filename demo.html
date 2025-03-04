@@ -26,11 +26,10 @@
             );
             firework.updateSize(canvas,window);
             ctx=canvas.getContext("2d");
+            firework.autoResize(canvas,window);
             setInterval(()=>{
                 firework.addRandomFirework();           //just run after start
             }, 1500);
-
-            firework.autoResize(canvas,window);
 
             startButton = document.getElementById("control-button");
             startButton.onclick = ()=> {
