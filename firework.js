@@ -276,22 +276,26 @@ class FireworkCanvas {
         this.#max_fireworks = max;
     }
 
-    setAutoCloseOrStart() {
+    setAutoCloseOrStart(start_func=null,stop_func=null) {
         this.removeAutoCloseOrStart();
         window.addEventListener('visibilitychange',()=> {
             if(document.hidden) {
+                if(stop_func != null) stop_func();
                 this.stop();
             } else {
+                if(start_func != null) start_func();
                 this.start();
             }
         });
     }
 
-    removeAutoCloseOrStart() {
+    removeAutoCloseOrStart(start_func=null,stop_func=null) {
         window.removeEventListener('visibilitychange',()=> {
             if(document.hidden) {
+                if(stop_func != null) stop_func();
                 this.stop();
             } else {
+                if(start_func != null) start_func();
                 this.start();
             }
         });
