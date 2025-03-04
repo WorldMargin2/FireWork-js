@@ -104,7 +104,6 @@ class Firework {
         }
         if(this.launch_end) {
             if(this.explode_position!=null){
-                console.log(this.explode_position);
                 this.particles=[];
                 this.explode(this.explode_position[0],this.explode_position[1]);
                 this.explode_position = null;
