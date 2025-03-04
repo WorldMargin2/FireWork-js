@@ -17,16 +17,18 @@
                 10,                                     /* max rendering fireworks(max_fireworks) */
                 args={
                     radius: 2,/* radius of firework */
-                    speed: 100,
-                    gravity: 30,
+                    speed: 150,
+                    gravity: 50,
                     wake_particles: 75,/* max rendering wake */
-                    life: 2,/* life of firework */
-                    explode_particles: 75,/* max rendering explode */
+                    life: 3,/* life of firework */
+                    explode_time: 2,/* life of explode */
+                    explode_particles: 150,/* max rendering explode */
                 }
             );
             firework.updateSize(canvas,window);
             ctx=canvas.getContext("2d");
             firework.autoResize(canvas,window);
+            firework.setAutoCloseOrStart();
             setInterval(()=>{
                 firework.addRandomFirework();           //just run after start
             }, 1500);
