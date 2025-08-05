@@ -36,7 +36,7 @@ class Particle {
 
     calculatePosition() {
         this.arg.x = this.initial_x + this.v_x * (this.now_life / 1000);
-        this.arg.y = this.initial_y + this.v_y * (this.now_life / 1000) - ( this.arg.gravity * Math.pow(this.now_life , 2) / 1000000) / 2;
+        this.arg.y = this.initial_y + this.v_y * (this.now_life / 1000) - ( this.arg.gravity * Math.pow(this.now_life/1000 , 2) ) / 2;
     };
 
     update(delta) {
